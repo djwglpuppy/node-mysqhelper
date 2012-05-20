@@ -1,0 +1,21 @@
+{
+  "name": "mysql-simple",
+  "version": "0.0.1beta",
+  "author": "David K Roberts <davidroberts@gmail.com> (http://www.drodev.com/)",
+  "description": "A class simplyfying the usage of the Mysql Library created by felixge",
+  "homepage": "https://github.com/djwglpuppy/mysql-node-simple",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/djwglpuppy/mysql-node-simple.git"
+  },
+  "main": "./index",
+  "dependencies": {
+    "mysql": ">=0.0.1",
+    "underscore": ">=0.0.1",
+    "async": ">=0.0.1"
+  },
+  "engines": {
+    "node": "*"
+  },
+  "private": true
+}

@@ -1,5 +1,5 @@
 {
-  "name": "mysql-simple",
+  "name": "mysqlhelper",
   "version": "0.0.1beta",
   "author": "David K Roberts <davidroberts@gmail.com> (http://www.drodev.com/)",
   "description": "A class simplyfying the usage of the Mysql Library created by felixge",

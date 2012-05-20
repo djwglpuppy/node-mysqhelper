@@ -1,10 +1,10 @@
 _ = require("underscore")
 async = require("async")
-
+mysql = require("mysql")
 
 client = {}
 
-exports.createClient = (mysql, config) ->
+exports.createClient = (config) ->
     client = exports.client = mysql.createClient
         host: config.host
         database: config.database

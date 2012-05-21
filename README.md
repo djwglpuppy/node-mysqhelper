@@ -106,7 +106,7 @@ dbHelper.get
 	table: "products"
 	fields: ["id", "title", "description", "qty"]
 	where: {type: "clothing", in_stock: true}
-	orderBy: "title ASC"
+	orderby: "title ASC"
 	resultsReturn: true
 	onComplete: (products) ->
 		console.log products

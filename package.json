@@ -1,12 +1,12 @@
 {
   "name": "mysqlhelper",
-  "version": "0.0.1beta",
+  "version": "0.0.1",
   "author": "David K Roberts <davidroberts@gmail.com> (http://www.drodev.com/)",
-  "description": "A class simplyfying the usage of the Mysql Library created by felixge",
-  "homepage": "https://github.com/djwglpuppy/mysql-node-simple",
+  "description": "A class simplifying the usage of the fantastic Mysql Library created by felixge",
+  "homepage": "https://github.com/djwglpuppy/node-mysqhelper",
   "repository": {
     "type": "git",
-    "url": "git://github.com/djwglpuppy/mysql-node-simple.git"
+    "url": "git://github.com/djwglpuppy/node-mysqhelper.git"
   },
   "main": "./index",
   "dependencies": {
@@ -16,6 +16,5 @@
   },
   "engines": {
     "node": "*"
-  },
-  "private": true
+  }
 }

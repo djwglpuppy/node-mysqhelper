@@ -5,13 +5,9 @@ mysql = require("mysql")
 client = {}
 
 exports.createClient = (config) ->
-    client = exports.client = mysql.createClient
-        host: config.host
-        database: config.database
-        user: config.user
-        password: config.password
+    client = exports.client = mysql.createClient(config)
 
-class DB
+class DBHelper
     constructor: ->
         @client = client
         
@@ -73,8 +69,6 @@ class DB
                 endResult = {}
                 _.each results, (result) ->
                     endResult[" #{result.id} "] = result
-                
-                console.log endResult
                 
                 args.onComplete(endResult)
             else if args.resultsReturn
@@ -139,7 +133,7 @@ class DB
     deletion: (args = {}, onComplete = ->) ->
         _.defaults args,
             table: ""
-            data: {}
+            where: {}
             id: null
             onComplete: null
         
@@ -147,8 +141,8 @@ class DB
         onComplete = args.onComplete if args.onComplete?
         
         qry = "DELETE FROM #{args.table} WHERE "
-        qry += _.map(args.data, (data, key) -> "#{key} = ?").join(" AND ")
-        @client.query(qry, _.values(args.data), onComplete)
+        qry += _.map(args.where, (data, key) -> "#{key} = ?").join(" AND ")
+        @client.query(qry, _.values(args.where), onComplete)
 
 
     loadExportData: (args = {}) ->
@@ -185,4 +179,4 @@ class DB
             else
                 value
 
-exports.DB = DB
+exports.DBHelper = DBHelper

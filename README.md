@@ -1,8 +1,9 @@
 # MySqlHELPER
 
-A Class Created in CoffeeScript that makes working with felixge's [node-mysql] (https://github.com/felixge/node-mysql) a little easier (I think / hope)
+A class created in CoffeeScript that makes working with felixge's [node-mysql] (https://github.com/felixge/node-mysql) a little easier (I think / hope)
 
-To get the most out of this module, I highly recommend you use it in conjunction with CoffeeScript (especially for extending classes)
+To get the most out of this module, I highly recommend you use it in conjunction with CoffeeScript (especially for extending classes).  This module will still work fine with Regular JS. 
+
 
 ##Installation
 
@@ -41,11 +42,11 @@ Creates the mysql client instance.  The `options` are the exact same as the `mys
 
 ### DBHelper Class & Methods
 
-#### DBHelper Class
+#### Constructor
 
 Holds a series of methods to make working with `node-mysql` a little quicker.  I use this class primary to build other classes with CoffeeScript.
 
-<i>Example of creating a new instance</i>
+*New Instance Usage:*
 
 ```coffeescript
 helper = new db.DBHelper()
@@ -57,12 +58,11 @@ helper.get
 	onComplete: -> console.log "Hello number 1 user", arguments
 ```
 
-<i>Example of extending the class to organize data (preferred)</i>
+*Class Extension Usage (recommended):*
 
 ```coffeescript
 
 class Users extends db.DBHelper
-
 	getByID: (id, onComplete) ->
 		@get
 			table: "users"
@@ -71,10 +71,8 @@ class Users extends db.DBHelper
 			onComplete: onComplete
 
 users = new Users()
-
 users.getByID 1, -> console.log "Hello number 1 user", arguments
 ```
-
 
 #### @client
 
@@ -85,6 +83,43 @@ The reference to the mysql client created with `createClient`.  This is an insta
 #### @onerow(query, cb)
 
 #### @get(params)
+
+This will retrieve data from a specified mysqlsql table
+
+<b>params</b>
+
+- table (string) : the table to query (**required**)
+- id (number) : the id of the table (table has to have an id field)
+- fields (array) : A list of fields to return in the query (returns all by default)
+- where (object) : field / value of how you want to filter your result set (**required**)
+- keyById (bool) : return result as an object keyed by the `id` field of the table (false by default)
+- onerow (bool) : return only the first row (false by default)
+- orderby (string) : order query by specific field in the string (ex/ "name ASC")
+- resultsReturn (bool) : only return the results instead of the error and fields in the callback
+- onComplete (callback) : callback once the query is complete (**required**)
+
+*Usage:*
+
+```coffeescript
+#Grabbing a group of Products
+dbHelper.get
+	table: "products"
+	fields: ["id", "title", description", "qty"]
+	where: {type: "clothing", in_stock: true}
+	orderBy: "title ASC"
+	resultsReturn: true
+	onComplete: (products) ->
+		console.log products
+
+
+#Grabbing a single Product
+dbHelper.get
+	table: "products"
+	id: productID
+	onerow: true
+	onComplete: (product) ->
+		console.log product
+```
 
 #### @insert(params)
 

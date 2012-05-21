@@ -89,7 +89,7 @@ This will retrieve data from a specified mysqlsql table
 **params**
 
 - **table (string)** : the table to query (**required**)
-- **id (number)** : the id of the table (table has to have an id field)
+- **id (number)** : the id of the table (table has to have an id field) (this will override the **onerow** param to `true`)
 - **fields (array)** : A list of fields to return in the query (returns all by default)
 - **where (object)** : field / value of how you want to filter your result set (**required**)
 - **keyById (bool)** : return result as an object keyed by the `id` field of the table (false by default)
@@ -116,7 +116,6 @@ dbHelper.get
 dbHelper.get
 	table: "products"
 	id: productID
-	onerow: true
 	onComplete: (product) ->
 		console.log product
 ```

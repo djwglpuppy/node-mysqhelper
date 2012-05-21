@@ -86,17 +86,17 @@ The reference to the mysql client created with `createClient`.  This is an insta
 
 This will retrieve data from a specified mysqlsql table
 
-<b>params</b>
+**params**
 
-- table (string) : the table to query (**required**)
-- id (number) : the id of the table (table has to have an id field)
-- fields (array) : A list of fields to return in the query (returns all by default)
-- where (object) : field / value of how you want to filter your result set (**required**)
-- keyById (bool) : return result as an object keyed by the `id` field of the table (false by default)
-- onerow (bool) : return only the first row (false by default)
-- orderby (string) : order query by specific field in the string (ex/ "name ASC")
-- resultsReturn (bool) : only return the results instead of the error and fields in the callback
-- onComplete (callback) : callback once the query is complete (**required**)
+- **table (string)** : the table to query (**required**)
+- **id (number)** : the id of the table (table has to have an id field)
+- **fields (array)** : A list of fields to return in the query (returns all by default)
+- **where (object)** : field / value of how you want to filter your result set (**required**)
+- **keyById (bool)** : return result as an object keyed by the `id` field of the table (false by default)
+- **onerow (bool)** : return only the first row (false by default)
+- **orderby (string)** : order query by specific field in the string (ex/ "name ASC")
+- **resultsReturn (bool)** : only return the results instead of the error and fields in the callback
+- **onComplete (callback)** : callback once the query is complete (**required**)
 
 *Usage:*
 
@@ -104,7 +104,7 @@ This will retrieve data from a specified mysqlsql table
 #Grabbing a group of Products
 dbHelper.get
 	table: "products"
-	fields: ["id", "title", description", "qty"]
+	fields: ["id", "title", "description", "qty"]
 	where: {type: "clothing", in_stock: true}
 	orderBy: "title ASC"
 	resultsReturn: true

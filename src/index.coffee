@@ -19,6 +19,7 @@ class DBHelper
     use: (db) -> @client.query "USE #{db}"
     truncate: (table, onComplete = ->) -> @client.query "TRUNCATE TABLE #{table}", onComplete
     onerow: (qry, onComplete) -> @q "#{qry} LIMIT 0,1", (results, fields) -> onComplete(results[0], fields)
+    end: (onComplete = ->) -> onComplete()
     
     get: (args = {}) ->
         _.defaults args,

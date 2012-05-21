@@ -18,7 +18,7 @@ db = require("mysqlhelper")
 #Open the connection to the Mysql Database
 db.createClient
 	host: "localhost"
-	database: "etymdb"
+	database: "database"
 	user: "root"
 	password: ""
 

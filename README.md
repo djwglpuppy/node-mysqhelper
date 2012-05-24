@@ -74,9 +74,64 @@ users = new Users()
 users.getByID 1, -> console.log "Hello number 1 user", arguments
 ```
 
-#### @client
+#### @client (obj)
 
 The reference to the mysql client created with `createClient`.  This is an instance of the `node-mysql` object.  Every client method found at [node-mysql] (https://github.com/felixge/node-mysql) can be used here
+
+#### @completeCleaner (bool)
+
+This is a public object property that can be set to true to make sure that no SCRIPT tags get inserted / updated into the tables
+<br />*(defaults to false)*
+
+#### @insert(params)
+
+Insert Data Into a Table
+
+**params**
+
+- **table (string) ** : the table to insert data into
+*<i>(required)*
+
+- **data (obj)** : data to insert into the table
+<br />*(required)*
+
+This will be entered in a `{field: value}` format
+
+```javascript
+{
+	name: "David Roberts",
+	age: 34,
+	hasdog: true
+}
+```
+
+- **replace (bool)** : Use a REPLACE statement instead of INSERT
+<br />*(defaults to false)*
+
+- **cleanValues (bool)** : This will override the `completeCleaner` public property to allow (or not allow) script tags
+<br />*(defaults to NULL by default, but if you set it to TRUE or FALSE it will take precedence)*
+
+- **onComplete(cb(err, dbinfo, insertid))** : The callBack once the operation has been performed
+<br />*(optional (though recommended))*
+
+cb arguments:
+
+- **err** : error information sent back from mysql library
+- **dbinfo** : database information sent back from mysqllibrary
+- **insertid** : **NEW!** the insert id of the record inserted
+
+Usage:
+
+```coffeescript
+dbHelper.get
+	table: "products"
+	data: 
+		title: "shoe"
+		description: "so comfy"
+		qty: 25
+		onComplete: (err, dbinfo, insertid) ->
+			console.log "Inserted New Product: #{insertid}"
+```
 
 #### @q(query, cb)
 
@@ -84,7 +139,7 @@ The reference to the mysql client created with `createClient`.  This is an insta
 
 #### @get(params)
 
-This will retrieve data from a specified mysqlsql table
+Retrieve data from a specified mysqlsql table
 
 **params**
 
@@ -119,8 +174,6 @@ dbHelper.get
 	onComplete: (product) ->
 		console.log product
 ```
-
-#### @insert(params)
 
 #### @update(params)
 

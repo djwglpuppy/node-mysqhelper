@@ -2,6 +2,7 @@ _ = require("underscore")
 async = require("async")
 mysql = require("mysql")
 
+exports
 client = {}
 
 exports.createClient = (config) ->
@@ -10,6 +11,7 @@ exports.createClient = (config) ->
 class DBHelper
     constructor: ->
         @client = client
+        @completeCleaner = false
         
     q: (qry, onComplete = ->) ->
         @client.query qry, (err, results, fields) =>
@@ -78,12 +80,14 @@ class DBHelper
                 args.onComplete(err, results, fields)
 
 
+
     insert: (args = {}) ->
         _.defaults args,
             table: ""
             data: {}
             initUser: false
             replace: false
+            cleanValues: null
             onComplete: ->
 
         if args.initUser
@@ -94,12 +98,20 @@ class DBHelper
                 modify_date: @now()
         
         prefix = if args.replace then "REPLACE" else "INSERT"
-        
 
         qry = "#{prefix} INTO #{args.table} "
         qry += "(" + _.keys(args.data).join(", ") + ")"
         qry += " VALUES (" + _.map(args.data, -> "?").join(", ") + ")"
-        @client.query qry, @cleanValues(args.data), (err, info) ->
+
+
+        cleanMe = args.cleanValues?= @completeCleaner
+
+        insertiondata = if cleanMe
+            @cleanValues(args.data)
+        else
+            _.values(args.data)
+
+        @client.query qry,  insertiondata, (err, info) ->
             newID = if err? then null else info.insertId
             args.onComplete(err, info, newID)
 
@@ -111,6 +123,7 @@ class DBHelper
             id: null
             where: {}
             editUser: false
+            cleanValues: null
             onComplete: ->
                 
         if args.editUser
@@ -124,8 +137,14 @@ class DBHelper
         qry += _.map(args.data, (data, key) -> "#{key} = ?").join(", ")
         qry += " WHERE "
         qry += _.map(args.where, (data, key) -> "#{key} = ?").join(" AND ")
-        
-        vals = @cleanValues(args.data)      
+
+
+        cleanMe = args.cleanValues?= @completeCleaner
+        vals = if cleanMe
+            @cleanValues(args.data)
+        else
+            _.values(args.data)
+
         _.each(_.values(args.where), (value) -> vals.push(value))
 
         @client.query(qry, vals, args.onComplete)

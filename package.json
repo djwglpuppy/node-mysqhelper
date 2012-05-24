@@ -3,6 +3,9 @@
   "version": "0.0.3",
   "author": "David K Roberts <davidroberts@gmail.com> (http://www.drodev.com/)",
   "description": "A class simplifying the usage of the fantastic Mysql Library created by felixge",
+  "bugs": {
+    "url": "https://github.com/djwglpuppy/mysqhelper/issues"
+  },
   "homepage": "https://github.com/djwglpuppy/node-mysqhelper",
   "repository": {
     "type": "git",
@@ -14,6 +17,15 @@
     "underscore": ">=0.0.1",
     "async": ">=0.0.1"
   },
+  "devDependencies": {
+    "should": ">0.0.1",
+    "mocha": ">0.0.1"
+  },
+  "keywords": [
+    "mysql",
+    "database",
+    "abstraction"
+  ],
   "engines": {
     "node": "*"
   }

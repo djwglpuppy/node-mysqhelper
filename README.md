@@ -74,13 +74,13 @@ users = new Users()
 users.getByID 1, -> console.log "Hello number 1 user", arguments
 ```
 
-#### @client (obj)
+#### @client 
 
 The reference to the mysql client created with `createClient`.  This is an instance of the `node-mysql` object.  Every client method found at [node-mysql] (https://github.com/felixge/node-mysql) can be used here
 
-#### @completeCleaner (bool)
+#### @completeCleaner
 
-This is a public object property that can be set to true to make sure that no SCRIPT tags get inserted / updated into the tables
+This is a public object property that can be set to TRUE to make sure that no SCRIPT tags get inserted / updated into the tables
 <br />*(defaults to false)*
 
 #### @insert(params)
@@ -113,12 +113,10 @@ This will be entered in a `{field: value}` format
 
 - **onComplete(cb(err, dbinfo, insertid))** : The callBack once the operation has been performed
 <br />*(optional (though recommended))*
-
-cb arguments:
-
-- **err** : error information sent back from mysql library
-- **dbinfo** : database information sent back from mysqllibrary
-- **insertid** : **NEW!** the insert id of the record inserted
+	- cb args:
+		- **err** : error information sent back from mysql library
+		- **dbinfo** : database information sent back from mysqllibrary
+		- **insertid** : **NEW!** the insert id of the record inserted
 
 Usage:
 

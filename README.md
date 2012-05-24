@@ -126,8 +126,9 @@ dbHelper.get
 		title: "shoe"
 		description: "so comfy"
 		qty: 25
-		onComplete: (err, dbinfo, insertid) ->
-			console.log "Inserted New Product: #{insertid}"
+	cleanValues: true
+	onComplete: (err, dbinfo, insertid) ->
+		console.log "Inserted New Product: #{insertid}"
 ```
 
 #### @q(query, cb)

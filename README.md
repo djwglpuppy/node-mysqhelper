@@ -74,14 +74,13 @@ users = new Users()
 users.getByID 1, -> console.log "Hello number 1 user", arguments
 ```
 
-#### @client 
+###Public Properties
+- **client (obj)** :The reference to the mysql client created with `createClient`.  This is an instance of the `node-mysql` object.  Every client method found at [node-mysql] (https://github.com/felixge/node-mysql) can be used here
 
-The reference to the mysql client created with `createClient`.  This is an instance of the `node-mysql` object.  Every client method found at [node-mysql] (https://github.com/felixge/node-mysql) can be used here
-
-#### @completeCleaner
-
-This is a public object property that can be set to TRUE to make sure that no SCRIPT tags get inserted / updated into the tables
+- **completeCleaner (bool)** : This is a public object property that can be set to TRUE to make sure that no SCRIPT tags get inserted / updated into the tables
 <br />*(defaults to false)*
+
+###Public Methods
 
 #### @insert(params)
 
@@ -89,7 +88,7 @@ Insert Data Into a Table
 
 **params**
 
-- **table (string) ** : the table to insert data into
+- **table (string)** : the table to insert data into
 *<i>(required)*
 
 - **data (obj)** : data to insert into the table

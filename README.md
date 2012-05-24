@@ -134,4 +134,6 @@ dbHelper.get
 
 #### @use(database)
 
+####@getMultipleTables(params)
+
 #### @truncate(table, cb)

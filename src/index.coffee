@@ -171,6 +171,22 @@ class DBHelper
                 loadData()
         ), -> args.onComplete())
 
+
+    getMultipleTables: (args = {}) ->
+        _.defaults args,
+            tables: []
+            onComplete: ->
+        self = @
+        data = {}
+        async.forEach args.tables,((table, cb) ->
+            self.get
+                table: table
+                resultsReturn: true
+                onComplete: (r) ->
+                    data[table] = r
+                    cb()
+        ), -> args.onComplete(data)
+
     now: -> new Date()
     escapedNow: -> @client.escape(@now())    
     cleanValues: (values) ->

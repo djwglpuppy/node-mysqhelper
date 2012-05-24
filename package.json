@@ -1,6 +1,6 @@
 {
   "name": "mysqlhelper",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "author": "David K Roberts <davidroberts@gmail.com> (http://www.drodev.com/)",
   "description": "A class simplifying the usage of the fantastic Mysql Library created by felixge",
   "homepage": "https://github.com/djwglpuppy/node-mysqhelper",

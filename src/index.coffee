@@ -156,8 +156,8 @@ class DBHelper
             where: {}
             id: null
             onComplete: null
-        
-        (args.data = {id: args.id}) if args.id?
+
+        (args.where = {id: args.id}) if args.id?
         onComplete = args.onComplete if args.onComplete?
         
         qry = "DELETE FROM #{args.table} WHERE "
